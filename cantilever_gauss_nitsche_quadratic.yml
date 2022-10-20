@@ -1,0 +1,29 @@
+RegularGrid:
+    n: 2
+    γ: 5
+
+Ω:
+    type: Element{:Tri3}
+    𝓒:
+        tag: Ω
+    𝓖:
+        type: TriGI3
+        𝝭:  [𝝭,∂𝝭∂x,∂𝝭∂y] 
+
+Γᵍ:
+    type: Element{:Seg2}
+    𝓒:
+        tag: Γᵍ     
+    𝓖:
+        type: SegGI2
+        𝝭:  [𝝭,∂𝝭∂x,∂𝝭∂y]         
+        
+
+
+Γᵗ:
+    type: Element{:Seg2}
+    𝓒:
+        tag: Γᵗ     
+    𝓖:
+        type: SegGI2
+        𝝭:  [𝝭] 
