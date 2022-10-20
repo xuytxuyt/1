@@ -1,7 +1,7 @@
 using Revise,ApproxOperator, YAML
 ndiv = 8
-config = YAML.load_file("cantilever_gauss_nitsche_quadratic.yml")
-elements,nodes = importmsh(cantilever"*string(ndiv)*".msh",config)
+config = YAML.load_file("./yml/cantilever.yml")
+elements,nodes = importmsh("./msh/cantilever.msh",config)
 np=length(nodes)
 
 set∇𝝭!(elements["Ω"])
