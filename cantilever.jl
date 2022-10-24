@@ -52,5 +52,6 @@ prescribe!(elements["Ω"],:∂v∂y=>(x,y,z)->P/EI*(L-x)*y*ν)
 op = Operator{:Hₑ_PlaneStress}(:E=>E,:ν=>ν)
 h1,l2 = op(elements["Ω"])
 
-# l2 = log10(l2)
-# h1 = log10(h1)
+l2 = log10(l2)
+h1 = log10(h1)
+
