@@ -5,6 +5,7 @@ elements,nodes = importmsh("./msh/cantilever.msh",config)
 np=length(nodes)
 
 set∇𝝭!(elements["Ω"])
+set𝝭!(elements["Ω"])
 set𝝭!(elements["Γᵗ"])
 set𝝭!(elements["Γᵍ"])
 P=1000.0
