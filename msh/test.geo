@@ -19,7 +19,7 @@ Transfinite Curve{1,2,3,4} = n+1;
 Transfinite Surface{1};
 
 Physical Curve("Γᵍ") = {1,2,3,4};
-Physical Surface("Ω") = {1};
+// Physical Surface("Ω") = {1};
 
 Mesh.Algorithm = 8;
 Mesh.MshFileVersion = 2;

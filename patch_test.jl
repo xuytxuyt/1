@@ -2,11 +2,15 @@
 using ApproxOperator, YAML
 
 config = YAML.load_file("./yml/patch_test.yml")
+config_λ = YAML.load_file("./yml/patch_test_lm.yml")
 elements, nodes = importmsh("./msh/test.msh",config)
+elements_λ, nodes_λ = importmsh("./msh/test_lm.msh",config_λ)
 nₚ = length(nodes)
+nₗ = length(nodes_λ)
 
 set∇𝝭!(elements["Ω"])
 set𝝭!(elements["Γᵍ"])
+set𝝭!(elements_λ["Γᵍ"])
 
 prescribe!(elements["Γᵍ"],:g=>(x,y,z)->1.0+2x+3y)
 
@@ -21,11 +25,14 @@ ops = [
 
 k = zeros(nₚ,nₚ)
 f = zeros(nₚ)
+g = zeros(nₚ,nₗ)
+q = zeros(nₗ)
 
 ops[1](elements["Ω"],k)
-ops[4](elements["Γᵍ"],k,f)
+# ops[4](elements["Γᵍ"],k,f)
+ops[5](elements["Γᵍ"],elements_λ["Γᵍ"],g,q)
 
-d = k\f
+d = [k g;g' zeros(nₗ,nₗ)]\[f;q]
 
 push!(nodes,:d=>d)
 
