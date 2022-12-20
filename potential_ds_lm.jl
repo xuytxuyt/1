@@ -1,7 +1,7 @@
 using Revise, TOML, ApproxOperator
 
-config = TOML.parsefile("./toml/test.toml")
-elements,nodes = importmsh("./msh/test.msh",config)
+config = TOML.parsefile("./toml/ds_penalty.toml")
+elements,nodes = importmsh("./msh/square_1.msh",config)
 
 nₚ = getnₚ(elements["Ω"])
 
@@ -39,6 +39,12 @@ ops[1](elements["Ω"],k)
 ops[2](elements["Ω"],f)
 ops[4](elements["Γᵍ"],k,f)
 
-d = k\f
+# d = k\f
+# push!(getfield(nodes[1],:data),:d=>(2,d))
 
-dex = ops[6](elements["∂Ω"])
+# dex = ops[6](elements["∂Ω"])
+
+# prescribe!(elements["Ω"],:u=>u)
+# prescribe!(elements["Ω"],:∂u∂x=>∂u∂x)
+# prescribe!(elements["Ω"],:∂u∂y=>∂u∂y)
+# H₁,L₂ = ops[5](elements["Ω"])

@@ -5,8 +5,8 @@
 ["Ω"]
 "type" = "DiscreteElement{:Tri3}"
 "𝓒"."tag"  = "Ω"
-"𝓖"."type" = "TriGI3"
-"𝓖"."𝝭" = "∇₂𝝭"
+"𝓖"."type" = "TriGI13"
+"𝓖"."𝝭" = "∇𝝭"
 
 ["Γᵗ"]
 "type" = "DiscreteElement{:Tri3}"
