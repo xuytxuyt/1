@@ -16,12 +16,11 @@
 "𝓖"."𝝭" = "𝝭"
 
 ["Γᵍ"]
-"type" = "DiscreteElement{:Tri3}"
-"𝓒"."tag"  = "Ω"
-"𝓖"."tag" = "Γᵍ"
+"type" = "Element{:Seg2}"
+"𝓒"."tag"  = "Γᵍ"
 "𝓖"."type" = "SegGI5"
 "𝓖"."𝝭" = "𝝭"
-"𝓖"."normal" = true
+"𝓖"."𝐶" = "∂Ω"
 
 ["Γ"]
 "type" = "DiscreteElement{:Tri3}"
