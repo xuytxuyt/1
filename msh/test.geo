@@ -1,6 +1,6 @@
 
 a = 1.0;
-n = 4;
+n = 2;
 
 Point(1) = {0.0, 0.0, 0.0};
 Point(2) = {  a, 0.0, 0.0};
@@ -22,6 +22,6 @@ Physical Curve("Γᵍ") = {1,2,3,4};
 // Physical Curve("Γᵗ") = {3,4};
 Physical Surface("Ω") = {1};
 
-Mesh.Algorithm = 8;
+// Mesh.Algorithm = 8;
 Mesh.MshFileVersion = 2;
 Mesh 2;
