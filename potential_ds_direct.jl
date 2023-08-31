@@ -1,7 +1,7 @@
 using Revise, TOML, ApproxOperator
 
 config = TOML.parsefile("./toml/ds_direct.toml")
-elements,nodes = importmsh("./msh/square_2.msh",config)
+elements,nodes = importmsh("./msh/square_1.msh",config)
 # elements,nodes = importmsh("./msh/square_2_irregular.msh",config)
 
 nₚ = length(elements["∂Ω"])
@@ -45,8 +45,8 @@ fb = zeros(nₚ)
 
 ops[1](elements["Ω"],k)
 ops[2](elements["Ω"],f)
-# ops[3](elements["Γ"],f)
-ops[5](elements["Ω"],fb)
+ops[3](elements["Γ"],f)
+# ops[5](elements["Ω"],fb)
 # f .+= fb./3
 ops[4](elements["Γᵍ"],k,f)
 
@@ -61,16 +61,16 @@ prescribe!(elements["Ω"],:∂u∂x=>∂u∂x)
 prescribe!(elements["Ω"],:∂u∂y=>∂u∂y)
 H₁,L₂ = ops[6](elements["Ω"])
 
-# q = zeros(nₚ)
-# ops[3](elements["Γ"],q)
+q = zeros(nₚ)
+ops[3](elements["Γ"],q)
 # f
 # q
-# p = zeros(nₚ)
-# opb = Operator{:∫bdΩ}()
-# opb(elements["Ω"],p)
-# op∇u = Operator{:∫∇udΓ}()
-# dux,duy = op∇u(elements["∂Ω"])
+p = zeros(nₚ)
+opb = Operator{:∫bdΩ}()
+opb(elements["Ω"],p)
+op∇u = Operator{:∫∇udΓ}()
+dux,duy = op∇u(elements["∂Ω"])
 # q[2]-(-p[2] + dux[1]+duy[1]+dux[3]+duy[3]-dux[4]-duy[4]-dux[5]-duy[5])/3
 # err = q-p/3
-# q[2]+(-dux[1]-duy[3]+dux[5]+duy[4])/3
+q[2]+(-dux[1]-duy[3]+dux[5]+duy[4])/6
 # p[2]+(-duy[1]-dux[3]+dux[4]+duy[5])
