@@ -1,17 +1,26 @@
 
-function import_tri3(filename::String)
-    elms,~ = ApproxOperator.importmsh(filename)
+function import_tri3(filename1::String,filename2::String)
+    elms,~ = ApproxOperator.importmsh(filename1)
+    elms_p = ApproxOperator.importmsh(filename2)
     nₚ = length(elms["Ω"][1].x)
 
     d = zeros(nₚ)
     elements = Dict{String,Vector{ApproxOperator.AbstractElement}}()
 
-    f_Ω = ApproxOperator.Field{(:𝐼,),1,(:𝑔,:𝐺,:𝐶,:𝑠),4}(Element{:Tri3},:TriGI3)
+    f_Ω = ApproxOperator.Field{(:𝐼,),1,(:𝑔,:𝐺,:𝐶,:𝑠),4}(Element{:Tri3},:TriGI13)
+    f_Ωᵖ = ApproxOperator.Field{(:𝐼,),1,(:𝑔,:𝐺,:𝐶,:𝑠),4}(Element{:Tri3},:TriGI13)
     f_Γᵍ = ApproxOperator.Field{(:𝐼,),1,(:𝑔,:𝐺,:𝐶,:𝑠),4}(Element{:Seg2},:SegGI2)
 
     elements["Ω"] = f_Ω(elms["Ω"])
+    elements["Ωᵖ"] = f_Ωᵖ(elms_p["Ω"])
     elements["Γᵍ"] = f_Γᵍ(elms["Γᵍ"])
     push!(f_Ω,
+        :d=>(:𝐼,d),
+        :𝝭=>:𝑠,
+        :∂𝝭∂x=>:𝑠,
+        :∂𝝭∂y=>:𝑠,
+    )
+    push!(f_Ωᵖ,
         :d=>(:𝐼,d),
         :𝝭=>:𝑠,
         :∂𝝭∂x=>:𝑠,
@@ -27,7 +36,7 @@ function import_tri3(filename::String)
             :𝝭=>:𝑠,
         )
     end
-    return elements, d
+    return elements, d, elms_p
 end
 
 function import_tr(filename::String)
